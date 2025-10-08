@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilkanth Productions | Cinematic Storytelling & Editing</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic visual elements -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Configure Tailwind to use Poppins font and define custom colors */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            /* NEW HIGH-CONTRAST DARK BLUE/GRAY PALETTE (Optimized for visibility) */
+            --color-dark-bg: #0D1117; /* Deepest Dark Gray/Blue */
+            --color-card-bg: #161B22; /* Slightly lighter Dark Card */
+            --color-primary: #1F6FEB; /* Deep Blue for buttons */
+            --color-secondary: #5DADE2; /* Sky Blue Accent */
+            --color-text-light: #F0F6F0; /* CRITICAL: Near White Text */
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-dark-bg); 
+            color: var(--color-text-light); /* Ensures text is visible */
+            scroll-behavior: smooth;
+        }
+
+        /* Utility Class for Primary Accent */
+        .text-accent { color: var(--color-secondary); }
+
+        /* Primary Button Styling */
+        .btn-primary, .btn-whatsapp {
+            background-color: var(--color-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+        }
+        .btn-primary:hover, .btn-whatsapp:hover {
+            background-color: var(--color-secondary); 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(93, 173, 226, 0.4);
+        }
+
+        /* Pricing Card Uniformity and Hover (FIXED SIZE) */
+        .pricing-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 480px; /* Consistent height for all cards */
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #30363D; /* Dark border */
+            background-color: var(--color-card-bg);
+            border-radius: 0.75rem; 
+        }
+
+        /* Uniform Hover effect for ALL pricing cards */
+        .pricing-card:hover {
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 30px rgba(93, 173, 226, 0.4);
+            transform: translateY(-8px);
+        }
+        
+        .card-button-container {
+            text-align: center; /* Center the button text */
+        }
+
+        /* AGGRESSIVE RESPONSIVE TYPOGRAPHY FIXES (CRITICAL MOBILE OVERHAUL) */
+        @media (max-width: 767px) {
+            /* Navbar and general font scaling */
+            .nav-link-mobile { font-size: 0.75rem; /* text-xs */ }
+            
+            /* Buttons smaller */
+            .btn-primary, .btn-whatsapp { 
+                font-size: 0.75rem !important; /* text-xs */
+                padding: 0.6rem 1rem !important; 
+            }
+            
+            /* Hero headline significantly smaller */
+            .hero-h1 { font-size: 2.25rem; line-height: 1.1; } /* text-4xl equivalent */
+            .hero-text { font-size: 0.8rem; } 
+
+            /* Section headings smaller */
+            h2 { font-size: 1.5rem; } /* Reduced from 1.75rem */
+
+            /* Pricing text scaling fixed to maintain card size */
+            /* UNIFORMITY FIX: All package price/title text is now aggressively scaled down to the same small size range */
+            .pricing-card .text-5xl, .pricing-card .text-6xl { font-size: 2.5rem; } /* Unified price size */
+            .pricing-card .text-3xl, .pricing-card .text-4xl { font-size: 1.5rem; } /* Unified package name size */
+            
+            .pricing-card { min-height: 400px; padding: 1.5rem; }
+            .pricing-card ul { font-size: 0.75rem; } /* List items are smaller */
+
+            /* Service lists smaller */
+            .service-list-text { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- Header / Navigation Bar (Sticky, High Contrast) -->
+    <header class="sticky top-0 z-50 shadow-lg border-b border-gray-700" style="background-color: var(--color-dark-bg);">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center max-w-7xl">
+            
+            <!-- Company Name / Text Logo -->
+            <a href="#" class="text-2xl sm:text-3xl font-extrabold tracking-wider" style="color: var(--color-text-light);">
+                Nilkanth <span class="text-accent">Productions</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex space-x-8 text-sm lg:text-base">
+                <a href="#services" class="text-gray-400 hover:text-accent transition duration-300 font-medium">Services</a>
+                <a href="#pricing" class="text-gray-400 hover:text-accent transition duration-300 font-medium">Pricing</a>
+                <a href="#team" class="text-gray-400 hover:text-accent transition duration-300 font-medium">Our Team</a>
+                <a href="#projects" class="text-gray-400 hover:text-accent transition duration-300 font-medium">Projects</a>
+                <a href="#contact" class="text-gray-400 hover:text-accent transition duration-300 font-medium">Contact</a>
+            </div>
+            
+            <a href="#book" class="hidden md:block btn-primary px-5 py-2 rounded-sm font-semibold shadow-md text-sm">
+                Book Appointment
+            </a>
+            
+            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-400 rounded-lg hover:bg-gray-800">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden shadow-inner pb-4" style="background-color: var(--color-card-bg);">
+            <a href="#services" class="block px-4 py-2 text-gray-300 hover:bg-gray-800 font-medium nav-link-mobile">Services</a>
+            <a href="#pricing" class="block px-4 py-2 text-gray-300 hover:bg-gray-800 font-medium nav-link-mobile">Pricing</a>
+            <a href="#team" class="block px-4 py-2 text-gray-300 hover:bg-gray-800 font-medium nav-link-mobile">Our Team</a>
+            <a href="#projects" class="block px-4 py-2 text-accent hover:bg-gray-800 font-medium nav-link-mobile">Projects</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-300 hover:bg-gray-800 font-medium nav-link-mobile">Contact</a>
+            <a href="#book" class="block px-4 py-2 btn-primary mt-2 font-medium nav-link-mobile">Book Appointment</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (CENTERED STRUCTURE) -->
+    <section class="text-white py-24 md:py-40 min-h-[70vh] flex items-center border-b border-gray-700" style="background-color: var(--color-dark-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl fade-in-up text-center">
+            <!-- Text Centered on ALL displays -->
+            <div class="max-w-4xl mx-auto">
+                <p class="text-sm uppercase tracking-widest text-accent mb-3 font-semibold">Cinematic Excellence in Gujarat</p>
+                <h1 class="hero-h1 text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-4 tracking-tight leading-tight">
+                    Where Vision Meets <span class="border-b-4 border-accent pb-1 inline-block">Professional Production.</span>
+                </h1>
+                <p class="hero-text text-base md:text-xl text-gray-400 mb-10 font-light">
+                    High-end video, editing, and brand handling delivered from RAJKOT and JAMNAGAR. Start your project today.
+                </p>
+                <a href="#book" class="btn-primary inline-block text-white px-8 py-3 rounded-sm font-bold uppercase tracking-wider shadow-xl shadow-blue-500/50 text-base">
+                    Book Appointment
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Detailed Services Section (TWO-COLUMN ORGANIZED LIST) -->
+    <section id="services" class="py-16 md:py-24" style="background-color: var(--color-card-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl fade-in-up">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-4xl font-bold text-white mb-2">Production Service Domains</h2>
+                <p class="text-base sm:text-xl text-gray-400">Our expertise spans six core areas of visual media.</p>
+            </div>
+            
+            <!-- Service Grid (New 2-Column Feature Block Structure) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 max-w-5xl mx-auto">
+                
+                <!-- Service Feature 1 -->
+                <div class="flex items-start space-x-4 p-4 border-b border-gray-700 hover:bg-gray-800 transition duration-300 rounded-sm">
+                    <i data-lucide="briefcase" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white">Business & Brand Promotion</h3>
+                        <p class="text-gray-400 service-list-text text-sm">Product showcases, store launches, customer review reels, and comprehensive brand campaigns.</p>
+                    </div>
+                </div>
+                
+                <!-- Service Feature 2 -->
+                <div class="flex items-start space-x-4 p-4 border-b border-gray-700 hover:bg-gray-800 transition duration-300 rounded-sm">
+                    <i data-lucide="camera" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white">Events & Occasions</h3>
+                        <p class="text-gray-400 service-list-text text-sm">Wedding, pre-wedding, engagement highlights, and coverage for corporate/festival events.</p>
+                    </div>
+                </div>
+
+                <!-- Service Feature 3 -->
+                <div class="flex items-start space-x-4 p-4 border-b border-gray-700 hover:bg-gray-800 transition duration-300 rounded-sm">
+                    <i data-lucide="graduation-cap" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white">Educational & Informative</h3>
+                        <p class="text-gray-400 service-list-text text-sm">Explainer videos, tutorials, how-to guides, and skill showcases designed for maximum retention.</p>
+                    </div>
+                </div>
+
+                <!-- Service Feature 4 -->
+                <div class="flex items-start space-x-4 p-4 border-b border-gray-700 hover:bg-gray-800 transition duration-300 rounded-sm">
+                    <i data-lucide="building-2" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white">Corporate & Professional</h3>
+                        <p class="text-gray-400 service-list-text text-sm">Company intro films, employee showcases, recruitment reels, and conference coverage.</p>
+                    </div>
+                </div>
+
+                <!-- Service Feature 5 -->
+                <div class="flex items-start space-x-4 p-4 border-b border-gray-700 hover:bg-gray-800 transition duration-300 rounded-sm">
+                    <i data-lucide="bot" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white">AI & Creative Concepts</h3>
+                        <p class="text-gray-400 service-list-text text-sm">AI-generated concepts, voiceover integration, and 2D avatar videos for modern media.</p>
+                    </div>
+                </div>
+
+                <!-- Service Feature 6 -->
+                <div class="flex items-start space-x-4 p-4 border-b border-gray-700 hover:bg-gray-800 transition duration-300 rounded-sm">
+                    <i data-lucide="laugh" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl text-white">Creative & Entertainment</h3>
+                        <p class="text-gray-400 service-list-text text-sm">Cinematic storytelling, comedy, dance reels, and custom motivational visual content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section (NEW MINIMALIST CARD STRUCTURE) -->
+    <section id="pricing" class="py-16 md:py-24" style="background-color: var(--color-dark-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl fade-in-up">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-4xl font-bold text-white mb-2">Social Media Packages</h2>
+                <p class="text-base sm:text-xl text-gray-400">Fixed-price monthly packages for high-impact brand presence.</p>
+            </div>
+            
+            <!-- Three Main Packages - ALL CARDS SAME SIZE (FIXED) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 items-start">
+                
+                <!-- Silver Package -->
+                <div class="shadow-2xl pricing-card">
+                    <div class="mb-4 border-b border-gray-700 pb-4">
+                        <span class="text-sm font-semibold text-gray-400 mb-2 block">Level 1</span>
+                        <h3 class="text-3xl font-bold text-white">SILVER</h3>
+                        <p class="text-5xl font-extrabold text-accent mt-2">₹5,999</p>
+                    </div>
+                    <ul class="text-left space-y-3 flex-grow mb-6 text-gray-300 text-sm">
+                        <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-gray-400 mr-3 mt-1"></i>10 Reels (30 Seconds Max)</li>
+                        <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-gray-400 mr-3 mt-1"></i>03 Static/Graphic Posts</li>
+                        <li class="flex items-start text-xs text-gray-500"><i data-lucide="layers" class="w-5 h-5 mr-3 mt-1"></i>Shooting, Editing & Account Handling Included</li>
+                    </ul>
+                    <div class="card-button-container">
+                        <a href="#book" class="w-full btn-primary text-white py-3 rounded-sm font-semibold text-sm inline-block">Choose Silver</a>
+                    </div>
+                </div>
+                
+                <!-- Gold Package (FIXED: Identical Size and Style, using same text classes) -->
+                <div class="shadow-2xl pricing-card">
+                    <div class="mb-4 border-b border-gray-700 pb-4">
+                        <span class="text-sm font-semibold text-gray-400 mb-2 block">Level 2</span>
+                        <h3 class="text-3xl font-bold text-white">GOLD</h3>
+                        <p class="text-5xl font-extrabold text-accent mt-2">₹9,999</p>
+                    </div>
+                    <ul class="text-left space-y-3 flex-grow mb-6 text-gray-300 text-sm">
+                        <li class="flex items-start"><i data-lucide="check-circle" class="w-6 h-6 text-gray-400 mr-3 mt-1"></i>10 Reels (60 Seconds Max)</li>
+                        <li class="flex items-start"><i data-lucide="check-circle" class="w-6 h-6 text-gray-400 mr-3 mt-1"></i>05 Static/Graphic Posts</li>
+                        <li class="flex items-start text-xs text-gray-500"><i data-lucide="layers" class="w-6 h-6 mr-3 mt-1"></i>Shooting, Editing & Account Handling Included</li>
+                    </ul>
+                    <div class="card-button-container">
+                        <a href="#book" class="w-full btn-primary text-white py-3 rounded-sm text-sm font-bold inline-block">Choose Gold</a>
+                    </div>
+                </div>
+
+                <!-- Platinium Package -->
+                <div class="shadow-2xl pricing-card">
+                    <div class="mb-4 border-b border-gray-700 pb-4">
+                        <span class="text-sm font-semibold text-gray-400 mb-2 block">Level 3</span>
+                        <h3 class="text-3xl font-bold text-white">PLATINIUM</h3>
+                        <p class="text-5xl font-extrabold text-accent mt-2">₹14,999</p>
+                    </div>
+                    <ul class="text-left space-y-3 flex-grow mb-6 text-gray-300 text-sm">
+                        <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-gray-400 mr-3 mt-1"></i>10 Reels (60 Seconds Max)</li>
+                        <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-gray-400 mr-3 mt-1"></i>05 Static/Graphic Posts</li>
+                        <li class="flex items-start"><i data-lucide="check-circle" class="w-5 h-5 text-gray-400 mr-3 mt-1"></i>01 Dedicated Ad Film (Included)</li>
+                        <li class="flex items-start text-xs text-gray-500"><i data-lucide="layers" class="w-5 h-5 mr-3 mt-1"></i>Shooting, Editing & Account Handling Included</li>
+                    </ul>
+                    <div class="card-button-container">
+                        <a href="#book" class="w-full btn-primary text-white py-3 rounded-sm font-semibold text-sm inline-block">Choose Platinium</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specialty Production Pricing (Simplified List) -->
+            <h3 class="text-2xl sm:text-3xl font-bold text-center mb-8 text-white border-b border-gray-600 pb-4">More Services</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                
+                <!-- Ad Films -->
+                <div class="bg-gray-800 text-white p-6 rounded-sm shadow-xl border-l-4 border-accent transition duration-300 hover:bg-gray-700">
+                    <h4 class="text-xl font-semibold mb-2">Ad Films (Upto 3 Mins)</h4>
+                    <p class="text-3xl font-extrabold text-secondary mb-4">₹3,499</p>
+                    <ul class="text-sm text-gray-400 list-inside space-y-1">
+                        <li>Story Development & Script Writing</li>
+                        <li>Sound Designing & Color Grading</li>
+                    </ul>
+                </div>
+                
+                <!-- Pre-Wedding -->
+                <div class="bg-gray-800 text-white p-6 rounded-sm shadow-xl border-l-4 border-accent transition duration-300 hover:bg-gray-700">
+                    <h4 class="text-xl font-semibold mb-2">Pre-Wedding Shoots</h4>
+                    <p class="text-3xl font-extrabold text-secondary mb-4">₹6,999</p>
+                    <ul class="text-sm text-gray-400 list-inside space-y-1">
+                        <li>Location Selection Assistance</li>
+                        <li>Creative Story Development</li>
+                        <li>Shooting & Editing</li>
+                    </ul>
+                </div>
+
+                <!-- Individual Reels -->
+                <div class="bg-gray-800 text-white p-6 rounded-sm shadow-xl border-l-4 border-accent transition duration-300 hover:bg-gray-700">
+                    <h4 class="text-xl font-semibold mb-2">Individual Reel Making</h4>
+                    <div class="mt-4 space-y-3">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-medium">30 Seconds Reel</span>
+                            <span class="text-xl font-bold text-secondary">₹699</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm border-t border-gray-700 pt-3">
+                            <span class="font-medium">60 Seconds Reel</span>
+                            <span class="text-xl font-bold text-secondary">₹1,199</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-16 md:py-24" style="background-color: var(--color-dark-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl fade-in-up">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-4xl font-bold text-white mb-2">The Managing Partners</h2>
+                <p class="text-base sm:text-xl text-gray-400">Smit and Harsh ensure creative vision and quality across every project.</p>
+            </div>
+            
+            <!-- Team Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 max-w-4xl mx-auto">
+                
+                <!-- Smit Sapariya -->
+                <div class="bg-gray-800 p-8 rounded-sm shadow-xl border-t-4 border-accent text-center border border-gray-700 hover:shadow-2xl transition duration-300 transform hover:scale-[1.02]">
+                    <i data-lucide="user-check" class="w-10 h-10 text-accent mb-4 mx-auto"></i>
+                    <h3 class="text-2xl font-bold text-white mb-1">Smit Sapariya</h3>
+                    <p class="text-lg font-semibold text-gray-400 mb-3">Co-Founder & Managing Partner, Rajkot</p>
+                    <p class="text-gray-500 text-sm">Oversees production logistics, client relations, and technical execution. The driving force behind structured planning.</p>
+                </div>
+                
+                <!-- Harsh Pala -->
+                <div class="bg-gray-800 p-8 rounded-sm shadow-xl border-t-4 border-accent text-center border border-gray-700 hover:shadow-2xl transition duration-300 transform hover:scale-[1.02]">
+                    <i data-lucide="wand-2" class="w-10 h-10 text-accent mb-4 mx-auto"></i>
+                    <h3 class="text-2xl font-bold text-white mb-1">Harsh Pala</h3>
+                    <p class="text-lg font-semibold text-gray-400 mb-3">Co-Founder & Managing Partner, Jamnagar</p>
+                    <p class="text-gray-500 text-sm">Leads creative direction, advanced post-production, and final artistic delivery. The visionary behind the cinematic look.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Coming Soon) -->
+    <section id="projects" class="py-16 md:py-24" style="background-color: var(--color-card-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-7xl fade-in-up">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-4xl font-bold text-white mb-2">Our Recent Work</h2>
+                <p class="text-base sm:text-xl text-gray-400">A showcase of our cinematic production portfolio.</p>
+            </div>
+            <div class="bg-gray-900 p-12 rounded-sm border-2 border-accent shadow-xl max-w-2xl mx-auto">
+                <i data-lucide="monitor-stop" class="w-16 h-16 text-accent mx-auto mb-4"></i>
+                <p class="text-2xl font-semibold text-white">Project Showcase - Coming Soon</p>
+                <p class="text-gray-400 mt-2">We are currently curating our best cinematic projects. Check back soon!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Booking Section (Simplified & Centralized) -->
+    <section id="contact" class="py-16 md:py-24" style="background-color: var(--color-dark-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl fade-in-up">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-4xl font-bold text-white mb-2">Book Your Appointment Now</h2>
+                <p class="text-base sm:text-xl text-gray-400">Submit your project details below to connect with us immediately via WhatsApp.</p>
+            </div>
+
+            <!-- WhatsApp Booking Form -->
+            <div id="book" class="bg-gray-900 p-6 sm:p-10 rounded-lg shadow-2xl border-t-8 border-accent space-y-6 border border-gray-700">
+                <h3 class="text-2xl font-bold text-white mb-4 flex items-center"><i data-lucide="send" class="w-6 h-6 mr-3 text-accent"></i> Direct Project Inquiry</h3>
+                <p class="text-sm text-gray-400">All fields are pre-filled into a WhatsApp message sent to **+91 8849700048**.</p>
+                
+                <form id="appointment-form" class="space-y-4">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <input type="text" id="name" name="name" placeholder="Your Full Name" required 
+                               class="w-full px-4 py-3 border border-gray-700 rounded-sm focus:ring-accent focus:border-accent transition duration-300 bg-gray-800 text-white text-sm">
+                        
+                        <!-- City select dropdown (Fixed options) -->
+                        <select id="city" name="city" required
+                                class="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-sm focus:ring-accent focus:border-accent transition duration-300 appearance-none text-sm">
+                            <option value="" disabled selected>Select Your City</option>
+                            <option value="Rajkot">Rajkot</option>
+                            <option value="Jamnagar">Jamnagar</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <select id="service" name="service" required
+                                class="w-full px-4 py-3 border border-gray-700 bg-gray-800 text-white rounded-sm focus:ring-accent focus:border-accent transition duration-300 appearance-none text-sm">
+                            <option value="" disabled selected>Select Primary Service</option>
+                            <option value="Platinum/Gold/Silver Package">Social Media Package</option>
+                            <option value="Ad Film Production">Ad Film Production</option>
+                            <option value="Pre-Wedding Shoot">Pre-Wedding Shoot</option>
+                            <option value="Individual Reel Making">Individual Reel Making</option>
+                            <option value="Corporate/Event Coverage">Corporate/Event Coverage</option>
+                            <option value="Other/Custom Project">Other/Custom Project</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <textarea id="description" name="description" rows="3"
+                                  placeholder="Service Description (Optional): Tell us about your creative goals or required dates."
+                                  class="w-full px-4 py-3 border border-gray-700 rounded-sm focus:ring-accent focus:border-accent transition duration-300 bg-gray-800 text-white text-sm"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full btn-whatsapp text-white px-6 py-4 rounded-sm font-bold flex items-center justify-center space-x-3 shadow-xl shadow-blue-500/40 text-base">
+                        <i data-lucide="whatsapp" class="w-5 h-5"></i>
+                        <span>Book Appointment via WhatsApp</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white py-12 border-t border-gray-700" style="background-color: var(--color-card-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-6">
+                
+                <!-- Col 1: Logo & Mission -->
+                <div>
+                    <h3 class="text-2xl font-extrabold tracking-wider text-white mb-3">Nilkanth <span class="text-accent">Productions</span></h3>
+                    <p class="text-gray-400 text-xs">Crafting high-impact visual stories for brands and individuals across Gujarat.</p>
+                </div>
+                
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-accent mb-3">Quick Links</h4>
+                    <ul class="space-y-1 text-xs">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Our Services</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition duration-300">Pricing Packages</a></li>
+                        <li><a href="#team" class="text-gray-400 hover:text-white transition duration-300">Meet The Team</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-white transition duration-300">Projects</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Harsh Pala Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold text-accent mb-3">Harsh Pala (Jamnagar)</h4>
+                    <p class="text-gray-400 text-xs mb-1">Phone: <a href="tel:8849700048" class="text-white hover:text-highlight">+91 8849700048</a></p>
+                    <p class="text-gray-400 text-xs">Email: <a href="mailto:harshpala777@gmail.com" class="text-white hover:text-highlight">harshpala777@gmail.com</a></p>
+                </div>
+
+                <!-- Col 4: Smit Sapariya Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold text-accent mb-3">Smit Sapariya (Rajkot)</h4>
+                    <p class="text-gray-400 text-xs mb-1">Phone: <a href="tel:7984642574" class="text-white hover:text-highlight">+91 7984642574</a></p>
+                    <p class="text-gray-400 text-xs">Email: <a href="mailto:smitsapariya2609@gmail.com" class="text-white hover:text-highlight">smitsapariya2609@gmail.com</a></p>
+                </div>
+
+            </div>
+
+            <!-- Copyright Row -->
+            <div class="text-center">
+                <p class="mb-2 text-gray-500 text-xs">&copy; 2024 Nilkanth Productions. All rights reserved. Cinematic vision by Smit & Harsh.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Form Submission, Mobile Menu, and Animations -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // 1. WhatsApp Form Logic
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const city = document.getElementById('city').value;
+            const service = document.getElementById('service').value;
+            const description = document.getElementById('description').value || "No detailed description provided.";
+            
+            const whatsappNumber = '8849700048';
+            
+            // Construct the message using URL encoding
+            const message = `*APPOINTMENT REQUEST - Nilkanth Productions*%0A%0A` +
+                            `Hello, I would like to book an appointment for a new project.%0A%0A` +
+                            `*Client Details*%0A` +
+                            `Name: ${name}%0A` +
+                            `City: ${city}%0A` +
+                            `Service: ${service}%0A` +
+                            `Description: ${description}%0A%0A` +
+                            `Please connect with me at your earliest convenience.`;
+
+            // WhatsApp link
+            const whatsappUrl = `https://wa.me/91${whatsappNumber}?text=${message}`; 
+            
+            // Redirect user to the WhatsApp link
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // 2. Mobile Menu Toggle Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            // Toggle between menu and close icons
+            const currentIcon = icon.getAttribute('data-lucide');
+            icon.setAttribute('data-lucide', currentIcon === 'menu' ? 'x' : 'menu');
+            
+            // Re-render the icon change
+            lucide.createIcons();
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // 3. Scroll-based Animation Logic (Advanced Feature)
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-in-up');
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Apply different delay based on index for staggered effect
+                        setTimeout(() => {
+                             entry.target.classList.add('visible');
+                             observer.unobserve(entry.target);
+                        }, entry.target.dataset.delay || 0);
+
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            // Apply observer to elements and add a small stagger delay (0, 100ms, 200ms...)
+            let delay = 0;
+            const staggerStep = 100;
+
+            elements.forEach(el => {
+                el.setAttribute('data-delay', delay);
+                observer.observe(el);
+                delay += staggerStep;
+            });
+        });
+    </script>
+
+</body>
+</html>
